@@ -22,7 +22,10 @@ class FancyBottomNavigation extends StatefulWidget {
       this.activeIconColor,
       this.inactiveIconColor,
       this.textColor,
-      this.barBackgroundColor})
+      this.barBackgroundColor,
+      this.iconTextOffScreen = 3,
+      this.iconTextOnScreen = 1,
+      this.hasElevation = true})
       : assert(onTabChangedListener != null),
         assert(tabs != null),
         assert(tabs.length > 1 && tabs.length < 5);
@@ -35,6 +38,9 @@ class FancyBottomNavigation extends StatefulWidget {
   final Color? barBackgroundColor;
   final List<TabData> tabs;
   final int initialSelection;
+  final double iconTextOffScreen;
+  final double iconTextOnScreen;
+  final bool hasElevation;
 
   final Key? key;
 
@@ -113,10 +119,16 @@ class FancyBottomNavigationState extends State<FancyBottomNavigation>
       children: <Widget>[
         Container(
           height: BAR_HEIGHT,
-          decoration: BoxDecoration(color: barBackgroundColor, boxShadow: [
-            BoxShadow(
-                color: Colors.black12, offset: Offset(0, -1), blurRadius: 8)
-          ]),
+          decoration: BoxDecoration(
+              color: barBackgroundColor,
+              boxShadow: widget.hasElevation
+                  ? [
+                      BoxShadow(
+                          color: Colors.black12,
+                          offset: Offset(0, -1),
+                          blurRadius: 8)
+                    ]
+                  : []),
           child: Row(
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -128,6 +140,8 @@ class FancyBottomNavigationState extends State<FancyBottomNavigation>
                     title: t.title,
                     iconColor: inactiveIconColor,
                     textColor: textColor,
+                    iconTextOffScreen: widget.iconTextOffScreen,
+                    iconTextOnScreen: widget.iconTextOnScreen,
                     callbackFunction: (uniqueKey) {
                       int selected = widget.tabs
                           .indexWhere((tabData) => tabData.key == uniqueKey);

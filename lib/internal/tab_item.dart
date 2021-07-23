@@ -9,6 +9,9 @@ const double ALPHA_ON = 1;
 const int ANIM_DURATION = 300;
 
 class TabItem extends StatelessWidget {
+  final double iconTextOffScreen;
+  final double iconTextOnScreen;
+
   TabItem(
       {required this.uniqueKey,
       required this.selected,
@@ -16,7 +19,9 @@ class TabItem extends StatelessWidget {
       required this.title,
       required this.callbackFunction,
       required this.textColor,
-      required this.iconColor});
+      required this.iconColor,
+      this.iconTextOffScreen = TEXT_OFF,
+      this.iconTextOnScreen = TEXT_ON});
 
   final UniqueKey uniqueKey;
   final String title;
@@ -41,7 +46,7 @@ class TabItem extends StatelessWidget {
             width: double.infinity,
             child: AnimatedAlign(
                 duration: Duration(milliseconds: ANIM_DURATION),
-                alignment: Alignment(0, (selected) ? TEXT_ON : TEXT_OFF),
+                alignment: Alignment(0, (selected) ? iconTextOnScreen : iconTextOffScreen),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(

@@ -1,3 +1,5 @@
+This fork was created in order to make a special implementation of the widget.
+
 # FancyBottomNavigation
 
 ![Fancy Gif](https://github.com/tunitowen/fancy_bottom_navigation/blob/master/fancy_gif.gif "Fancy Gif")
